@@ -54,12 +54,13 @@ main section.categories-show {
       aside.soldout {
         position: absolute;
         top: 0;
-        right: 197.5px;
+        left: 0;
         padding: 10px;
         background-color: #ff0000ab;
         border-top-left-radius: 4px;
         border-bottom-right-radius: 20px;
         font-size: 0.8em;
+        color: white;
       }
 // -------------------------------------
       &:hover {
