@@ -24,6 +24,52 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+
+    <% if current_user%>
+      <article>
+        <h2> Add a review </h2>
+        <div>
+          <%= form_for [@product, @review] do |form| %>
+            <div class="col-sm-8">
+              <dl>
+                <div>
+                  <dt><%= form.label :rating %></dt>
+                    <dd><%= form.number_field :rating, min: 0, max: 5, class: 'form-control rating'%></dd>
+                </div>
+                <div>
+                  <dt><%= form.label :description %></dt>
+                  <dd><%= form.text_area :description, class: 'form-control description' %></dd>
+                </div>
+                <dt></dt>
+                <dd><%= form.submit 'Submit Review', class: 'btn btn-primary' %></dd>
+              </dl>
+            </div>
+  
+          <% end %>
+        </div>
+      </article>
+      <% end %>
+  
+        <h3 class="reviews-title"> Reviews </h2>
+        <div>
+          <% @product.reviews.reverse_each do |info| %>
+            <div class="col-sm-8">
+              <dl class="dl-horizontal">
+                <dt>User</dt>
+                <dd><%= info.user.first_name %> <%= info.user.last_name %></dd>
+                <dt>Rating</dt>
+                <dd><%= info.rating %> / 5</dd>
+                <dt>Description</dt>
+                <dd><%= info.description %></dd>
+                <% if current_user == info.user %>
+                  <dt>Delete Review</dt>
+                  <dd><%= link_to 'Remove', product_review_url(@product.id, info.id), method: :delete, data: { confirm: "Are you sure?" } %></dd>
+                <% end %>
+              </dl>
+              
+            </div>
+          <% end %>
+        </div>
     </div>
 
   </article>
