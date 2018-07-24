@@ -22,6 +22,18 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt></dt>
+          <dd>
+          <% if current_user && @product.quantity != 0 %>
+            <%= link_to add_item_cart_path(product_id: @product.id), class: 'btn btn-primary', method: :put do %>
+              <%= fa_icon "shopping-cart", text: 'Add' %>
+            <% end %>
+          <% end %>
+          <span class="btn btn-default" id="rating">
+            <%= @product.reviews.average(:rating) %> / 5
+          </span>
+        </dd>
+
         </dl>
       </div>
 
